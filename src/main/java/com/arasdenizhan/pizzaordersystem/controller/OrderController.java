@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Controller
@@ -21,6 +22,12 @@ public class OrderController {
     @Autowired
     public OrderController(OrdersService ordersService) {
         this.ordersService = ordersService;
+    }
+
+    @GetMapping
+    public String homepage(Model model){
+        model.addAttribute("orderstest", new Orders());
+        return "order";
     }
 
     @GetMapping("/order")
@@ -44,6 +51,13 @@ public class OrderController {
     @GetMapping("/orderlist/{pizzaType}")
     public String orderlistByType(Model model, @PathVariable String pizzaType){
         model.addAttribute("allorders", ordersService.searchOrderByType(pizzaType));
+        return "orderlist";
+    }
+
+    @GetMapping("/orderDelete/{orderid}")
+    public String deleteOrder(Model model, @PathVariable Long orderid){
+        ordersService.deleteOrderById(orderid);
+        model.addAttribute("allorders", ordersService.getAllOrders());
         return "orderlist";
     }
 }

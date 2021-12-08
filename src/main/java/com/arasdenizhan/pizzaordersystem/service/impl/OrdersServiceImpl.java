@@ -33,12 +33,8 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public Orders deleteOrderById(Long id) {
-        Orders temp;
-        if((temp = getOrderById(id))!=null){
-            ordersRepository.deleteById(id);
-        }
-        return temp;
+    public void deleteOrderById(Long id) {
+        ordersRepository.deleteById(id);
     }
 
     @Override

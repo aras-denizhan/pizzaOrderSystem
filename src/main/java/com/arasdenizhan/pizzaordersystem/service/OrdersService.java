@@ -7,7 +7,7 @@ import java.util.List;
 public interface OrdersService {
     Orders addNewOrder(Orders orders);
     Orders getOrderById(Long id);
-    Orders deleteOrderById(Long id);
+    void deleteOrderById(Long id);
     List<Orders> searchOrderByType(String type);
     List<Orders> getAllOrders();
 }
